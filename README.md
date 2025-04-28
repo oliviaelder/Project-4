@@ -1,4 +1,4 @@
-# Project 4
+# Project 4: Appiontment Scheduler
 
 This project is an ASP.NET MVC web application that allows users to [briefly describe what your project does]. It uses Entity Framework for database interactions, and a local database is created automatically when the application is run for the first time.
 
