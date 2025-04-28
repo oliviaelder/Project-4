@@ -1,0 +1,48 @@
+﻿@using Appt_Scheduler.ViewModels
+@model DoctorViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Mountain View Appointment Scheduler</h1>
+
+    <!-- Doctor Dropdown -->
+    <div class="form-group">
+        <br />
+        <strong><label for="SelectedDoctorId" class="mb-2 font-weight-bold">Select your Doctor Name to View Availability:</label></strong>
+        <select id="SelectedDoctorId" class="form-control mx-auto" style="max-width: 400px;">
+            <option value="">-- Select a Doctor --</option>
+            @foreach (var doctor in Model.Doctors)
+            {
+                <option value="@doctor.Value">@doctor.Text</option>
+            }
+        </select>
+    </div>
+
+    <br />
+    <!-- View Schedule Button -->
+    <form id="viewScheduleForm" method="get" action="@Url.Action("ViewSchedule", "Appointments")">
+        <input type="hidden" name="doctorId" id="selectedDoctorId" />
+        <button type="submit" class="btn btn-primary">View Schedule</button>
+    </form>
+
+    <br />
+    <!-- Manage Availability Button -->
+    <form id="availabilityForm" method="get" action="@Url.Action("EditAvailability", "Doctors")">
+        <input type="hidden" name="doctorId" id="manageDoctorId" />
+      
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        const doctorSelect = document.getElementById("SelectedDoctorId");
+
+        function updateDoctorForms() {
+            const selectedId = doctorSelect.value;
+            document.getElementById("selectedDoctorId").value = selectedId;
+            document.getElementById("manageDoctorId").value = selectedId;
+        }
+
+        doctorSelect.addEventListener("change", updateDoctorForms);
+        window.addEventListener("load", updateDoctorForms);
+    </script>
+}

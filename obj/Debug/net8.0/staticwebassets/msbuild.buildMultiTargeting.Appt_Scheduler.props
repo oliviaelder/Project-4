@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Appt_Scheduler.props" />
+</Project>

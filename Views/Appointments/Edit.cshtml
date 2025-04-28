@@ -1,0 +1,80 @@
+﻿@model Appt_Scheduler.Models.Appointment
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h4>Edit Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <h2><strong>@Model.Patient.FName @Model.Patient.LName</strong></h2>
+                <input type="hidden" asp-for="PatientId" />
+            </div>
+
+
+            <input type="hidden" asp-for="AppointmentId" />
+            <div class="form-group">
+                <br />
+                <strong><label asp-for="ApptDate" class="control-label"></label></strong>
+                <input class="form-control" value="@Model.ApptDate.ToString("MM/dd/yyyy")" readonly />
+                <input type="hidden" asp-for="ApptDate" />
+            </div>
+            <div class="form-group">
+                <br />
+                <strong><label asp-for="ApptTime" class="control-label"></label></strong>
+                <input class="form-control" value="@DateTime.Today.Add(Model.ApptTime.ToTimeSpan()).ToString("hh:mm tt")" readonly />
+                <input type="hidden" asp-for="ApptTime" />
+            </div>
+
+            <div class="form-group">
+                <br />
+                <strong><label asp-for="ReasonForVisit" class="control-label"></label></strong>
+                <input asp-for="ReasonForVisit" class="form-control" />
+                <span asp-validation-for="ReasonForVisit" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <br />
+                <strong><label asp-for="Status" class="control-label"></label></strong>
+                <select asp-for="Status" class="form-control">
+                    <option value="Scheduled">Scheduled</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+        
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <br />
+                <strong><label class="control-label">Doctor</label></strong>
+                <input class="form-control" value="@Model.Doctor.DoctorFullName" readonly />
+                <input type="hidden" asp-for="DoctorId" />
+            </div>
+
+            <div class="form-group">
+                <br />
+                <input type="hidden" name="patientId" value="@Model.PatientId" />
+                <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                <br>
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Return to Main Menu</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

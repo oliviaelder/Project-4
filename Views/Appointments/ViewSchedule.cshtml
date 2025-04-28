@@ -1,0 +1,60 @@
+﻿@model Appt_Scheduler.Models.DoctorScheduleViewModel
+
+
+@if (TempData["AppointmentMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["AppointmentMessage"]
+    </div>
+}
+
+<h2>Scheduled Appointments for @ViewBag.DoctorName</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Patient</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var appt in Model.Appointments.OrderBy(a => a.ApptDate).ThenBy(a => a.ApptTime))
+
+        {
+            bool isUpcoming = appt.ApptDate > DateOnly.FromDateTime(DateTime.Today)
+            || (appt.ApptDate == DateOnly.FromDateTime(DateTime.Today) && appt.ApptTime > TimeOnly.FromDateTime(DateTime.Now));
+
+            <tr style="@(isUpcoming ? "font-weight:bold;" : "")">
+                <td>@appt.ApptDate.ToString("MM/dd/yyyy")</td>
+                <td>@DateTime.Today.Add(appt.ApptTime.ToTimeSpan()).ToString("hh:mm tt")</td>
+                <td>@($"{appt.Patient.FName} {appt.Patient.LName}")</td>
+
+                <td>@appt.ReasonForVisit</td>
+                <td>@appt.Status</td>
+                <td>
+
+                    <a asp-action="Delete"
+                       asp-controller="Appointments"
+                       asp-route-id="@appt.AppointmentId"
+                       asp-route-returnUrl="@Url.Action("ViewSchedule", "Appointments", new { doctorId = ViewBag.DoctorId })"
+                       class="btn btn-sm btn-danger">
+                        Delete
+                    </a>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+
+
+<div class="mt-4">
+    <a asp-controller="Doctors" asp-action="Select" class="btn btn-secondary">Return to Doctor Menu</a>
+</div>

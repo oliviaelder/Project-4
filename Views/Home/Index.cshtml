@@ -1,0 +1,47 @@
+﻿@model PatientViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Mountain View Appointment Scheduler</h1>
+<!-- Patient Dropdown -->
+<div class="form-group">
+    <br />
+        <strong><label for="SelectedPatientId" class="mb-2 font-weight-bold">Select your Patient Name to Access Appointment Scheduler:</label></strong>
+        <select id="SelectedPatientId" class="form-control mx-auto" style="max-width: 400px;">
+            <option value="">-- Select a Patient --</option> <!-- blank/default option -->
+            @foreach (var patient in Model.Patients)
+            {
+                <option value="@patient.Value">@patient.Text</option>
+            }
+        </select>
+</div>
+
+<br />
+<!-- Create Appointment Button -->
+<form id="createForm" method="get" action="@Url.Action("Create", "Appointments")">
+    <input type="hidden" name="patientId" id="createPatientId" />
+    <button type="submit" class="btn btn-primary">Create Appointment</button>
+</form>
+
+<br />
+<!-- View Appointments Button -->
+<form id="viewForm" method="get" action="@Url.Action("PatientAppointments", "Appointments")">
+    <input type="hidden" name="patientId" id="viewPatientId" />
+    <button type="submit" class="btn btn-secondary">View Appointments</button>
+</form>
+</div>
+
+@section Scripts {
+    <script>
+        const patientSelect = document.getElementById("SelectedPatientId");
+
+        function updateForms() {
+            const selectedId = patientSelect.value;
+            document.getElementById("createPatientId").value = selectedId;
+            document.getElementById("viewPatientId").value = selectedId;
+        }
+
+        // Update hidden inputs on page load and whenever selection changes
+        patientSelect.addEventListener("change", updateForms);
+        window.addEventListener("load", updateForms);
+    </script>
+}

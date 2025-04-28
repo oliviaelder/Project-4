@@ -1,0 +1,111 @@
+﻿@model Appt_Scheduler.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Schedule Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <input type="hidden" asp-for="PatientId" />
+                <label for="SelectedPatient" class="control-label"></label>
+                <h2> <strong id="SelectedPatient">@ViewBag.SelectedPatient</strong> </h2>
+            </div>
+
+            <div class="form-group">
+                <br />
+                <strong><label asp-for="ApptDate" class="control-label">Select an Appointment Date</label></strong>
+                <input asp-for="ApptDate" class="form-control" type="date" />
+                <span asp-validation-for="ApptDate" class="text-danger"></span>
+            </div>
+
+            <!-- Doctor Dropdown -->
+            <div class="form-group">
+                <br />
+                <strong><label asp-for="DoctorId" class="control-label">Select a Doctor</label></strong>
+                <select asp-for="DoctorId" class="form-control" asp-items="ViewBag.DoctorId">
+                    <option value="">-- Select a Doctor --</option> <!-- Default option for Doctor selection -->
+                </select>
+            </div>
+
+            <!-- Appointment Time -->
+            <div class="form-group">
+                <br />
+                <strong><label asp-for="ApptTime" class="control-label">Select an Available Time</label> </strong>
+                <select asp-for="ApptTime" class="form-control" id="ApptTime">
+                    <option value="">-- Select a time --</option>
+                </select>
+            </div>
+
+
+            @section Scripts {
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const doctorSelect = document.getElementById('DoctorId');
+                        const dateInput = document.getElementById('ApptDate');
+                        const timesDropdown = document.getElementById('ApptTime');
+
+                        function fetchTimes() {
+                            const doctorId = doctorSelect.value;
+                            const apptDate = dateInput.value;
+
+                            if (doctorId && apptDate) {
+                                fetch(`/Appointments/GetAvailableTimes?doctorId=${doctorId}&date=${apptDate}`)
+
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // Clear old options
+                                        timesDropdown.innerHTML = '<option value="">-- Select a time --</option>';
+
+                                 data.forEach(time => {
+                                        const option = document.createElement('option');
+                                        option.value = time.value;
+                                        option.text = time.label;
+                                        timesDropdown.appendChild(option);
+                                 });
+
+                             });
+                            }
+                        }
+
+                        doctorSelect.addEventListener('change', fetchTimes);
+                        dateInput.addEventListener('change', fetchTimes);
+                    });
+                </script>
+
+                @{
+                    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+                }
+            }
+
+
+            <div class="form-group">
+                <br />
+                <strong><label asp-for="ReasonForVisit" class="control-label">Reason for Appointment</label></strong>
+                <input asp-for="ReasonForVisit" class="form-control" />
+                <span asp-validation-for="ReasonForVisit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <br />
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Return to Main Menu</a>
+</div>
+
+<!-- Show success message after saving appointment -->
+@if (TempData["AppointmentMessage"] != null)
+{
+    <div class="alert alert-success mt-3">
+        @TempData["AppointmentMessage"]
+    </div>
+}
