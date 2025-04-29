@@ -1,6 +1,14 @@
 # Project 4: Appiontment Scheduler
+Challenge: Build an appointment scheduling system.
 
-This project is an ASP.NET MVC web application that allows users to [briefly describe what your project does]. It uses Entity Framework for database interactions, and a local database is created automatically when the application is run for the first time.
+Context: For the appointment scheduler project, I developed a system for users to schedule, edit, and cancel appointments. The application needed to handle appointment time slots, user data, and conflict resolution.
+
+Action: I created models for users, appointments, and time slots. The system allowed users to book available time slots and would flag conflicts if users tried to book overlapping appointments. The database schema included relationships between users and appointments, ensuring that each user could have multiple appointments.
+
+Results: The main challenge was ensuring the availability of time slots and properly handling overlapping appointment requests. After testing and iterating, I was able to implement a system where users could only book open slots and received proper error messages for conflicts.
+
+Reflection: This project gave me insight into real-time applications and handling conflicts in scheduling systems. It was rewarding to see users book appointments seamlessly.
+
 
 ## Requirements
 
