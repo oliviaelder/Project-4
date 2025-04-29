@@ -10,7 +10,7 @@ Results: The main challenge was ensuring the availability of time slots and prop
 Reflection: This project gave me insight into real-time applications and handling conflicts in scheduling systems. It was rewarding to see users book appointments seamlessly.
 
 
-## Requirements
+## Live Demo Limitations
 
 - Visual Studio 2022 or higher
 - SQL Server (LocalDB or a similar setup) for database support
