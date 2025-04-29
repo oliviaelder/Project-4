@@ -13,8 +13,13 @@ Reflection: This project helped me understand how to design a clean REST API, ma
 
  <img src="https://github.com/oliviaelder/Project-4/raw/main/PatientFunctions.png" alt="Patient Functions" style="max-width: 100%; height: auto;">
 
-  <img src="https://github.com/oliviaelder/Project-4/raw/main/DoctorFunctions.png" alt="Doctor Functions" style="max-width: 100%; height: auto;">
+<br>
+ <hr>
 
+  <img src="https://github.com/oliviaelder/Project-4/raw/main/DoctorFunctions.png" alt="Doctor Functions" style="max-width: 100%; height: auto;">
+  
+<br>
+<hr>
    <img src="https://github.com/oliviaelder/Project-4/raw/main/Admin.png" alt="Admin Functions" style="max-width: 100%; height: auto;">
    
 ## Live Demo Limitations
