@@ -9,7 +9,8 @@ Results: The main challenge was ensuring the availability of time slots and prop
 
 Reflection: This project gave me insight into real-time applications and handling conflicts in scheduling systems. It was rewarding to see users book appointments seamlessly.
 
-
+ <img src="https://github.com/oliviaelder/Project-4/raw/main/Appointment%20Schedular%20screanshot.png" alt="Appointment Schedular screanshot" style="max-width: 100%; height: auto;">
+ 
 ## Live Demo Limitations
 
 - Visual Studio 2022 or higher
