@@ -1,13 +1,15 @@
 # Project 4: Appiontment Scheduler
 Challenge: Build an appointment scheduling system.
 
-Context: For the appointment scheduler project, I developed a system for users to schedule, edit, and cancel appointments. The application needed to handle appointment time slots, user data, and conflict resolution.
+Context: I created a backend web service using the .NET Framework to allow users to book, view, update, and cancel appointments. The focus was on using RESTful APIs to manage appointments and ensure no time conflicts.
 
-Action: I created models for users, appointments, and time slots. The system allowed users to book available time slots and would flag conflicts if users tried to book overlapping appointments. The database schema included relationships between users and appointments, ensuring that each user could have multiple appointments.
+Action: I built a .NET Web API project and created models for User, Appointment, and TimeSlot. I used Entity Framework to connect to a SQL Server database. In the controller, I created endpoints for adding, updating, deleting, and checking available appointments.
 
-Results: The main challenge was ensuring the availability of time slots and properly handling overlapping appointment requests. After testing and iterating, I was able to implement a system where users could only book open slots and received proper error messages for conflicts.
+Result: The biggest challenge was correctly handling overlapping appointments. After improving the validation in the API, the scheduler reliably allowed only open time slots to be booked.
 
-Reflection: This project gave me insight into real-time applications and handling conflicts in scheduling systems. It was rewarding to see users book appointments seamlessly.
+Reflection: This project helped me understand how to design a clean REST API, manage database relationships with Entity Framework, and handle real-world validation problems like scheduling conflicts.
+
+
 
  <img src="https://github.com/oliviaelder/Project-4/raw/main/Appointment%20Schedular%20screanshot.png" alt="Appointment Schedular screanshot" style="max-width: 100%; height: auto;">
  
